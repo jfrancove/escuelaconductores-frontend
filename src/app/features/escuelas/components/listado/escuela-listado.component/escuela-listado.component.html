@@ -1,0 +1,71 @@
+<h2 class="text-center">Lista de escuela de conductores</h2>
+<br><br>
+<div class="container-fluid">
+    <div [formGroup]="ubigeoForm">  
+        <div class="row">
+                <div class="col-sm-12" style="text-align: right;">
+                    <button type="button" id="buscar" class="btn btn-danger btn-lg" (click)="agregar()">Agregar</button>                    
+                </div>
+                <br><br><br>
+                <div class="col-sm-12">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">ITEM</th>
+                            <th scope="col">DEPARTAMENTO</th>
+                            <th scope="col">PROVINCIA</th>
+                            <th scope="col">DISTRITO</th>
+                            <th scope="col">N° RUC</th>
+                            <th scope="col">NOMBRE DE ESTABLECIMIENTO</th>
+                            <th scope="col">DIRECCIÓN DE ESTABLECIMIENTO</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">ACCIONES</th>
+                        </thead>
+                        <tbody>
+                            @for (iteme of listaescuela 
+                                | paginate: { itemsPerPage: 5, currentPage: page, totalItems: totalItems }
+                                ; track $index ; let i = $index) {
+                                <tr>
+                                    <td>{{ (page - 1) * itemsPerPage + i + 1 }}</td>
+                                    <td>{{ iteme.departamento }}</td>
+                                    <td>{{ iteme.provincia }}</td>
+                                    <td>{{ iteme.distrito }}</td>
+                                    <td>{{ iteme.numero_ruc }}</td>
+                                    <td>{{ iteme.establecimiento }}</td>
+                                    <td>{{ iteme.direccion }}</td>
+                                    <td>{{ iteme.estado_escuela }}</td>     
+                                    <td style="text-align: center">
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-primary mr-2"
+                                            (click)="editar(iteme)"
+                                            title="Permite modificar una escuela"
+                                        >
+                                        Editar
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-danger mr-2"
+                                            (click)="eliminar(iteme)"
+                                            title="Elimina una escuela seleccionada"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>                              
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-12 text-center">
+                        <pagination-controls
+                            
+                            (pageChange)="pageChanged($event)" >
+                            
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+

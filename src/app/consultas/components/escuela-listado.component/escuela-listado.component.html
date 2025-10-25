@@ -1,0 +1,120 @@
+<div class="container-fluid">
+
+     <div style="background-color: #D9230F ; border-color: black;
+                border-style: solid; border-width: 3px;
+             padding-top: 30px; padding-bottom: 20px; height: 100px;"> 
+            <h5 style="color: white;">  Dirección General de Autorizaciones en Transportes</h5>
+        </div>
+
+    <div class="container">                
+
+        <div style="margin-top: 40px;">
+            <h2 class="text-center">Lista de escuelas de conductores</h2>
+        </div>
+
+        <div [formGroup]="ubigeoForm">            
+
+            <div style="border-style: solid; height: 360px; border-width: 2px; 
+            border-color: #D9230F; padding: 30px;">
+
+                <div class="form-group row">
+                    <div class="col-sm-2">Departamentos:</div>
+                    <div class="col-sm-9">
+                        <select class="form-select" formControlName="departamento" (change)="onDepartamentoChange($event)">
+                            <option value="00">Seleccione</option>
+                            @for (item of listadep; track $index) {
+                            <option value="{{item.id}}">{{item.departamento}}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-2">Provincias:</div>
+                    <div class="col-sm-9">
+                        <select class="form-select" formControlName="provincia" (change)="onProvinciaChange($event)">
+                            <option value="0000">Seleccione</option>
+                            @for (item of listapro; track $index) {
+                            <option value="{{item.id}}">{{item.provincia}}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-2">Distritos:</div>
+                    <div class="col-sm-9">
+                        <select class="form-select" formControlName="distrito">
+                            <option value="000000">Seleccione</option>
+                            @for (item of listadis; track $index) {
+                            <option value="{{item.ubigeo}}">{{item.nomdistrito}}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-2">Por nombre:</div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" formControlName="descripcion" />
+                    </div>
+                </div>
+
+                <br>
+                
+                <button type="button" id="buscar" class="btn btn-danger btn-lg" (click)="buscar()">Buscar</button>&nbsp;
+                <button type="button" id="limpiar" class="btn btn-danger btn-lg" (click)="limpiar()">Limpiar</button>
+        
+            </div>
+            
+            <!-- RESULTADO-->
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">ITEM</th>
+                            <th scope="col">DEPARTAMENTO</th>
+                            <th scope="col">PROVINCIA</th>
+                            <th scope="col">DISTRITO</th>
+                            <th scope="col">N° RUC</th>
+                            <th scope="col">NOMBRE DE ESTABLECIMIENTO</th>
+                            <th scope="col">DIRECCIÓN DE ESTABLECIMIENTO</th>
+                            <th scope="col">ESTADO</th>
+                        </thead>
+                        <tbody>
+                            @for (iteme of listaescuela 
+                                | paginate: { itemsPerPage: 5, currentPage: page, totalItems: totalItems }
+                                ; track $index ; let i = $index) {
+                                <tr>
+                                    <td>{{ (page - 1) * itemsPerPage + i + 1 }}</td>
+                                    <td>{{ iteme.departamento }}</td>
+                                    <td>{{ iteme.provincia }}</td>
+                                    <td>{{ iteme.distrito }}</td>
+                                    <td>{{ iteme.numero_ruc }}</td>
+                                    <td>{{ iteme.establecimiento }}</td>
+                                    <td>{{ iteme.direccion }}</td>
+                                    <td>{{ iteme.estado_escuela }}</td>                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-12 text-center">
+                        <pagination-controls
+                            
+                            (pageChange)="pageChanged($event)" >
+                            
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        
+
+    </div>
+
+</div>

@@ -1,0 +1,71 @@
+<h2>Nueva escuela de conductores</h2>
+<br>
+<div class="container-fluid">
+    <div [formGroup]="escuelaForm">
+
+        <hr>
+        <div class="form-group row">
+            <div class="col-sm-2">Departamentos:</div>
+            <div class="col-sm-7">
+                <select class="form-select" formControlName="departamento" (change)="onDepartamentoChange($event)">
+                    <option value="00">Seleccione</option>
+                    @for (item of listadep; track $index) {
+                    <option value="{{item.id}}">{{item.departamento}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-2">Provincias:</div>
+            <div class="col-sm-7">
+                <select class="form-select" formControlName="provincia" (change)="onProvinciaChange($event)">
+                    <option value="0000">Seleccione</option>
+                    @for (item of listapro; track $index) {
+                    <option value="{{item.id}}">{{item.provincia}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-2">Distritos:</div>
+            <div class="col-sm-7">
+                <select class="form-select" formControlName="distrito">
+                    <option value="000000">Seleccione</option>
+                    @for (item of listadis; track $index) {
+                    <option value="{{item.ubigeo}}">{{item.nomdistrito}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br>        
+        <div class="form-group row">
+            <div class="col-sm-2">RUC:</div>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" formControlName="ruc" />
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-2">Nombre de establecimiento:</div>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" formControlName="establecimiento" />
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-2">Dirección:</div>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" formControlName="direccion" />
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+        <button type="button" id="buscar" class="btn btn-danger btn-lg" (click)="agregar()">Guardar</button>&nbsp;
+        <button type="button" id="cancelar" class="btn btn-secondary btn-lg" (click)="cancelar()">Cancelar</button>
+
+    </div>
+</div>

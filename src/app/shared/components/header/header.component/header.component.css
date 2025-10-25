@@ -1,0 +1,12 @@
+.navbar {
+  height: 60px;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+}
+
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #212529;
+}
